@@ -23,6 +23,16 @@
   </properties>
 
   <dependencies>
+    <!-- ======= Modules ======= -->
+    <dependency>
+      <groupId>org.falcon.demo</groupId>
+      <artifactId>demo-business</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.falcon.demo</groupId>
+      <artifactId>demo-model</artifactId>
+    </dependency>
+    <!-- ======= Libraries ======= -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

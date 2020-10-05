@@ -21,7 +21,20 @@
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
 
+  <!-- ======================================================================= -->
+  <!-- Dependencies -->
+  <!-- ======================================================================= -->
   <dependencies>
+    <!-- ======= Modules ======= -->
+    <dependency>
+      <groupId>org.falcon.demo</groupId>
+      <artifactId>demo-consumer</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.falcon.demo</groupId>
+      <artifactId>demo-model</artifactId>
+    </dependency>
+    <!-- ======= Libraries ======= -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
