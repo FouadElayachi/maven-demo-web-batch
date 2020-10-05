@@ -117,10 +117,4 @@
     </pluginManagement>
       
   </build>
-  
-  <modules>
-      
-    <module>demo-batch</module>
-      
-  </modules>
 </project>
