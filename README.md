@@ -108,3 +108,26 @@ mvn -B archetype:generate -DarchetypeArtifactId=maven-archetype-quickstart -Darc
       <artifactId>demo-model</artifactId>
     </dependency>
 ```
+# Requirements
+
+##### Each of the webapp and batch modules contain a `info.properties` file with `application.version`.
+- Create a directory named `resources` in the `src/main` directory of each module.
+- Create the file `info.properties`in the `resources`directory for each module and copy the following code inside it:
+```
+application.version=${project.version}
+```
+- The version must be taken automaticly while bulding the project. For that, we filter the resource in each module by adding the following code in build of the pom.xml file:
+```
+    <!-- ======= Resources ======= -->
+    <resources>
+      <!-- Get the application version  -->
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>info.properties</include>
+        </includes>
+      </resource>
+    </resources>
+```
+
