@@ -130,4 +130,18 @@ application.version=${project.version}
       </resource>
     </resources>
 ```
+- To test the filtering, copy paste the following code in the App Class of the batch module and run the class:
+```
+        Properties vProp = new Properties();
+        InputStream vInputStream = null;
+        try {
+            vInputStream = App.class.getResourceAsStream("/info.properties");
+            vProp.load(vInputStream);
+        } finally {
+            if(vInputStream != null) {
+                vInputStream.close();
+            }
+        }
 
+        System.out.println("Application version: " + vProp.getProperty("application.version", "?"));
+```
