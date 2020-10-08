@@ -17,6 +17,31 @@
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
 
+  <!-- =============================================================== -->
+  <!-- Profiles -->
+  <!-- =============================================================== -->
+  <profiles>
+    <!-- Generate a JAR of the sources for each module during the package phase if this profile is activated -->
+    <profile>
+      <id>with-sources</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>source-jar</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
   <!-- =============================================================== -->
   <!-- Build -->
@@ -30,6 +55,12 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
+        </plugin>
+        <!-- Jar of sources -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.2.0</version>
         </plugin>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
