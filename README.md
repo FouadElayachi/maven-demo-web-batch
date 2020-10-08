@@ -110,7 +110,7 @@ mvn -B archetype:generate -DarchetypeArtifactId=maven-archetype-quickstart -Darc
 ```
 # Requirements
 
-#### Each of the webapp and batch modules contain a `info.properties` file with `application.version`.
+#### Each of the webapp and batch modules contain a `info.properties` file with `application.version`
 - Create a directory named `resources` in the `src/main` directory of each module.
 - Create the file `info.properties`in the `resources`directory for each module and copy the following code inside it:
 ```
@@ -145,7 +145,8 @@ application.version=${project.version}
 
     System.out.println("Application version: " + vProp.getProperty("application.version", "?"));
 ```
-#### Use profiles.
+
+#### Use profiles
 - Generate a JAR of the sources for each module during the package phase if this profile `with-sources` is activated.
 - To do that, we need to define a profile with `with-sources` id, and activate the plugin `maven-source-plugin` on `package` phase wich have `jar` as goal. Copy the following code on `pom.xml` of the main project.
 ````
@@ -176,3 +177,34 @@ application.version=${project.version}
   </profiles>
 ````
 - To test it, run the command `mvn clean package -P with-sources`.
+
+#### Generate a jar for `Javadoc` for each module during the `package`phase
+- Add the `javadoc` plugin inside the `pluginManagement` tag on the `pom.xml` file of the main project. Copy the following code:
+````
+  <!-- Javadoc -->
+  <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-javadoc-plugin</artifactId>
+    <version>3.2.0</version>
+  </plugin>
+````
+- The Javadoc must be generated with the `goal` jar during the `package`phase. To do that, add the following to the `build` tag inside the `pom.xml` of the main project:
+````
+<!-- ======= Generate JavaDoc ======= -->
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>javadoc-jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+    </plugin>
+  </plugins>
+````
+
