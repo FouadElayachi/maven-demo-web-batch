@@ -175,3 +175,4 @@ application.version=${project.version}
     </profile>
   </profiles>
 ````
+- To test it, run the command `mvn clean package -P with-sources`.
