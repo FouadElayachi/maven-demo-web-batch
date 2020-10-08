@@ -110,7 +110,7 @@ mvn -B archetype:generate -DarchetypeArtifactId=maven-archetype-quickstart -Darc
 ```
 # Requirements
 
-##### Each of the webapp and batch modules contain a `info.properties` file with `application.version`.
+#### Each of the webapp and batch modules contain a `info.properties` file with `application.version`.
 - Create a directory named `resources` in the `src/main` directory of each module.
 - Create the file `info.properties`in the `resources`directory for each module and copy the following code inside it:
 ```
@@ -132,16 +132,46 @@ application.version=${project.version}
 ```
 - To test the filtering, copy paste the following code in the App Class of the batch module and run the class:
 ```
-        Properties vProp = new Properties();
-        InputStream vInputStream = null;
-        try {
-            vInputStream = App.class.getResourceAsStream("/info.properties");
-            vProp.load(vInputStream);
-        } finally {
-            if(vInputStream != null) {
-                vInputStream.close();
-            }
-        }
+    Properties vProp = new Properties();
+    InputStream vInputStream = null;
+    try {
+      vInputStream = App.class.getResourceAsStream("/info.properties");
+      vProp.load(vInputStream);
+    } finally {
+      if(vInputStream != null) {
+        vInputStream.close();
+      }
+    }
 
-        System.out.println("Application version: " + vProp.getProperty("application.version", "?"));
+    System.out.println("Application version: " + vProp.getProperty("application.version", "?"));
 ```
+#### Use profiles.
+- Generate a JAR of the sources for each module during the package phase if this profile `with-sources` is activated.
+- To do that, we need to define a profile with `with-sources` id, and activate the plugin `maven-source-plugin` on `package` phase wich have `jar` as goal. Copy the following code on `pom.xml` of the main project.
+````
+  <!-- =============================================================== -->
+  <!-- Profiles -->
+  <!-- =============================================================== -->
+  <profiles>
+    <!-- Generate a JAR of the sources for each module during the package phase if this profile is activated -->
+    <profile>
+      <id>with-sources</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>source-jar</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+````
