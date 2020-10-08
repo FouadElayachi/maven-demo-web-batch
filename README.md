@@ -208,3 +208,53 @@ application.version=${project.version}
   </plugins>
 ````
 
+#### Generate `tar.gz/zip`files for the batch module
+- In order to generate the `tar.gz/zip` files that contains jar of the batch module and their dependencies during the package phase, first of all we need to add to add the following plugins inside the `pluginManagement` tag of the main `pom.xml`:
+````
+  <!-- Assembly -->
+  <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-assembly-plugin</artifactId>
+    <version>2.2-beta-5</version>
+  </plugin>
+````
+- Specify the configuration and the goal of the plugin inside the `pom.xml` of the batch module.
+````
+<!-- Assembly -->
+  <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-assembly-plugin</artifactId>
+    <configuration>
+      <descriptors>
+        <descriptor>src/assembly/archive.xml</descriptor>
+      </descriptors>
+    </configuration>
+    <executions>
+      <execution>
+        <id>assembly-archive</id>
+        <phase>package</phase>
+        <goals>
+          <goal>single</goal>
+        </goals>
+      </execution>
+    </executions>
+  </plugin>
+````
+- Spicify the main class that will be added in the jar generated inside the archive for the batch module.
+````
+  <!-- Jar creation -->
+  <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-jar-plugin</artifactId>
+    <configuration>
+      <archive>
+        <manifest>
+          <mainClass>org.falcon.demo.batch.App</mainClass>
+          <addClasspath>true</addClasspath>
+        </manifest>
+      </archive>
+    </configuration>
+  </plugin>
+````
+
+
