@@ -7,7 +7,6 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.falcon.demo</groupId>
   <artifactId>demo-batch</artifactId>
   <version>1.0-SNAPSHOT</version>
 
@@ -55,5 +54,42 @@
         </includes>
       </resource>
     </resources>
+
+    <!-- ======= Plugins ======= -->
+    <plugins>
+      <!-- Jar creation -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>org.falcon.demo.batch.App</mainClass>
+              <addClasspath>true</addClasspath>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+
+      <!-- Assembly -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptors>
+            <descriptor>src/assembly/archive.xml</descriptor>
+          </descriptors>
+        </configuration>
+        <executions>
+          <execution>
+            <id>assembly-archive</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 </project>
