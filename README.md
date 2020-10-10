@@ -240,6 +240,27 @@ application.version=${project.version}
     </executions>
   </plugin>
 ````
+- Define the assembly descriptor by creating an `archive.xml` inside `src/assembly/` of the batch module.
+````
+<assembly xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://maven.apache.org/ASSEMBLY/2.1.0"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd"
+>
+    <id>archive</id>
+
+    <formats>
+        <format>tar.gz</format>
+        <format>zip</format>
+    </formats>
+
+    <dependencySets>
+        <dependencySet>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+
+</assembly>
+````
 - Spicify the main class that will be added in the jar generated inside the archive for the batch module.
 ````
   <!-- Jar creation -->
@@ -250,7 +271,9 @@ application.version=${project.version}
       <archive>
         <manifest>
           <mainClass>org.falcon.demo.batch.App</mainClass>
+          <!-- list all the dependencies jar -->
           <addClasspath>true</addClasspath>
+          <classpathPrefix></classpathPrefix>
         </manifest>
       </archive>
     </configuration>
