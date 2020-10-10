@@ -9,7 +9,23 @@
 
   <name>demo</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>http://maven.apache.org</url>
+  <description>This project is dedicated for maven beginners, in order to tour the main concepts of this software.</description>
+
+  <organization>
+    <name>Falcon</name>
+    <url>https://github.com/FouadElayachi</url>
+  </organization>
+
+  <!-- =============================================================== -->
+  <!-- Distribution management -->
+  <!-- =============================================================== -->
+  <distributionManagement>
+    <site>
+      <id>website-demo</id>
+      <url>scp://localhost/tmp/</url>
+    </site>
+  </distributionManagement>
 
   <!-- =============================================================== -->
   <!-- Properties -->
@@ -77,6 +93,13 @@
           <artifactId>maven-assembly-plugin</artifactId>
           <version>2.2-beta-5</version>
         </plugin>
+        <!-- website generation -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+
+        </plugin>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
@@ -104,10 +127,6 @@
         <plugin>
           <artifactId>maven-site-plugin</artifactId>
           <version>3.7.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.0.0</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -168,6 +187,73 @@
         <artifactId>demo-model</artifactId>
         <version>1.0-SNAPSHOT</version>
       </dependency>
+
+      <!-- ======= Libraries ======= -->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.11</version>
+        <scope>test</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <!-- =============================================================== -->
+  <!-- Reporting -->
+  <!-- =============================================================== -->
+  <reporting>
+    <plugins>
+      <!-- ======= Report for general information of the project ======= -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>3.0.0</version>
+        <!-- Show only the reports mentioned in the reportSets section -->
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>index</report>
+              <report>summary</report>
+              <report>plugins</report>
+              <report>dependencies</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+
+      <!-- ======= Report for the tests ======= -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>3.0.0-M5</version>
+        <configuration>
+          <linkXRef>false</linkXRef>
+        </configuration>
+        <reportSets>
+          <!-- aggregate the test reports of all the modules -->
+          <reportSet>
+            <id>aggregate</id>
+            <reports>
+              <report>report</report>
+            </reports>
+            <!-- Don't execute the reportSet on sub modules -->
+            <inherited>false</inherited>
+            <configuration>
+              <aggregate>true</aggregate>
+            </configuration>
+          </reportSet>
+          <reportSet>
+            <id>modules</id>
+            <inherited>true</inherited>
+            <reports>
+              <report>report</report>
+            </reports>
+            <configuration>
+              <aggregate>false</aggregate>
+            </configuration>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>

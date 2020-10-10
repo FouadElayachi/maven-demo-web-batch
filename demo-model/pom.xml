@@ -7,7 +7,6 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.falcon.demo</groupId>
   <artifactId>demo-model</artifactId>
   <version>1.0-SNAPSHOT</version>
 
@@ -26,8 +25,6 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 

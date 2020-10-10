@@ -11,14 +11,9 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>demo-webapp Maven Webapp</name>
+  <name>demo-webapp</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.falcon.com</url>
-
-  <organization>
-    <name>Falcon</name>
-    <url>https://github.com/FouadElayachi</url>
-  </organization>
+  <url>http://maven.apache.org</url>
 
   <!-- =============================================================== -->
   <!-- Properties -->
@@ -42,12 +37,11 @@
       <groupId>org.falcon.demo</groupId>
       <artifactId>demo-model</artifactId>
     </dependency>
+
     <!-- ======= Libraries ======= -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 
