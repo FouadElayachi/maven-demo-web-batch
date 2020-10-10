@@ -7,7 +7,6 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.falcon.demo</groupId>
   <artifactId>demo-webapp</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
@@ -16,12 +15,18 @@
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
+  <!-- =============================================================== -->
+  <!-- Properties -->
+  <!-- =============================================================== -->
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <application.name>Demo app</application.name>
+    <maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>
+    <build.timestamp>${maven.build.timestamp}</build.timestamp>
   </properties>
 
+  <!-- =============================================================== -->
+  <!-- Dependencies -->
+  <!-- =============================================================== -->
   <dependencies>
     <!-- ======= Modules ======= -->
     <dependency>
