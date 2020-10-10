@@ -280,4 +280,81 @@ application.version=${project.version}
   </plugin>
 ````
 
+#### Generate a website for our project
+- First of all, create a `src/site/site.xml` file inside the main directory(demo) to describe our website. Copy the following code and add it to the file:
+````
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/DECORATION/1.7.0"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.7.0 http://maven.apache.org/xsd/decoration-1.7.0.xsd"
+>
+    <!-- ==== Define the skin(appearance) of my website  ==== -->
+    <!-- use the fluido template -->
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.9</version>
+    </skin>
+
+    <body>
+        <!-- ==== Breadcrumb trail  ==== -->
+        <breadcrumbs>
+            <item name="Home" href="index.html" />
+        </breadcrumbs>
+
+
+        <!-- ==== Menus  ==== -->
+        <!-- Menu to the parent project -->
+        <menu ref="parent" inherit="top" />
+        <!-- Menu to the different reports -->
+        <menu ref="reports" inherit="top" />
+        <!-- Menu to the different modules -->
+        <menu ref="modules" inherit="top" />
+
+        <!-- ==== Menu to the documentation  ==== -->
+        <menu name="Documentation">
+            <!-- Item to the setup page  -->
+            <item name="Setup" href="setup.html" />
+        </menu>
+    </body>
+
+    <!-- ==== Change the default positions of the publish date and version from the left to the right  ==== -->
+    <publishDate position="right" />
+    <version position="right" />
+</project>
+````
+- Add a documentation page for the setup using the `markdown` format by creating a `setup.md` file inside the `src/site/markdown` directory, and copy paste the following code:
+````
+## Setup
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+````
+- Move on to the `pom.xml` of the parent project, and define the deployment `url` for the website. We achieve it thanks to the distributionManagement section:
+````
+  <!-- =============================================================== -->
+  <!-- Distribution management -->
+  <!-- =============================================================== -->
+  <distributionManagement>
+    <site>
+      <id>website-demo</id>
+      <url>scp://localhost/tmp/</url>
+    </site>
+  </distributionManagement>
+````
+- In the pluginManagement section, add the `maven-site-plugin`:
+````
+  <!-- website generation -->
+  <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-site-plugin</artifactId>
+    <version>3.3</version>
+    <configuration>
+      <!-- website language -->
+      <locales>en</locales>
+    </configuration>
+  </plugin>
+````
+- Finally, we generate some reports for our website. We need to add a new section in the `pom.xml` of parent project named `reporting`:
+  
+
+
 
