@@ -251,6 +251,7 @@ application.version=${project.version}
         <manifest>
           <mainClass>org.falcon.demo.batch.App</mainClass>
           <addClasspath>true</addClasspath>
+          <classpathPrefix></classpathPrefix>
         </manifest>
       </archive>
     </configuration>
