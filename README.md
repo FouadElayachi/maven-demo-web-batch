@@ -1,6 +1,7 @@
 # maven-demo-web-batch
 
 # Description
+maven-demo-web-batch is a beginner friendly tutorial in order to elaborate the main concepts of maven software by using a Multitier architecture.
 
 # Getting started
 
