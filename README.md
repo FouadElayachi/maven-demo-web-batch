@@ -250,6 +250,7 @@ application.version=${project.version}
       <archive>
         <manifest>
           <mainClass>org.falcon.demo.batch.App</mainClass>
+          <!-- list all the dependencies jar -->
           <addClasspath>true</addClasspath>
           <classpathPrefix></classpathPrefix>
         </manifest>
