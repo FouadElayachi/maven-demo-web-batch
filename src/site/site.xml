@@ -23,7 +23,7 @@
         <!-- Menu to the different reports -->
         <menu ref="reports" inherit="top" />
         <!-- Menu to the different modules -->
-        <menu ref="modules" />
+        <menu ref="modules" inherit="top" />
 
         <!-- ==== Menu to the documentation  ==== -->
         <menu name="Documentation">
