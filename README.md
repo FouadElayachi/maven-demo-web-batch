@@ -355,7 +355,66 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
   </plugin>
 ````
 - Finally, we generate some reports for our website. We need to add a new section in the `pom.xml` of parent project named `reporting`:
-  
+  ````
+  <!-- =============================================================== -->
+  <!-- Reporting -->
+  <!-- =============================================================== -->
+  <reporting>
+    <plugins>
+      <!-- ======= Report for general information of the project ======= -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>3.0.0</version>
+        <!-- Show only the reports mentioned in the reportSets section -->
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>index</report>
+              <report>summary</report>
+              <report>plugins</report>
+              <report>dependencies</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+
+      <!-- ======= Report for the tests ======= -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>3.0.0-M5</version>
+        <configuration>
+          <linkXRef>false</linkXRef>
+        </configuration>
+        <reportSets>
+          <!-- aggregate the test reports of all the modules -->
+          <reportSet>
+            <id>aggregate</id>
+            <reports>
+              <report>report</report>
+            </reports>
+            <!-- Don't execute the reportSet on sub modules -->
+            <inherited>false</inherited>
+            <configuration>
+              <aggregate>true</aggregate>
+            </configuration>
+          </reportSet>
+          <reportSet>
+            <id>modules</id>
+            <inherited>true</inherited>
+            <reports>
+              <report>report</report>
+            </reports>
+            <configuration>
+              <aggregate>false</aggregate>
+            </configuration>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
+  ````
 
 
 
